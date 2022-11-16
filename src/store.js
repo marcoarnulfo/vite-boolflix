@@ -18,6 +18,7 @@ export const store = reactive({
     films : null,
     API_KEY: 'cfa82368dfdf0a8bb369a7770e576de6',
     API_URL: 'https://api.themoviedb.org/3/search/movie?',
+    API_URL_TV: 'https://api.themoviedb.org/3/search/tv?',
     callApi(url){
         axios.get(url)
         .then(response => {
@@ -29,6 +30,8 @@ export const store = reactive({
     },
     ShowFilms () {
         const ShowFilm = `${this.API_URL}api_key=${this.API_KEY}&query=${this.UserChoice}`
+        const ShowTvSeries = `${this.API_URL_TV}api_key=${this.API_KEY}&query=${this.UserChoice}`
         this.callApi(ShowFilm)
+        this.callApi(ShowTvSeries)
     }
 })

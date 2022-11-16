@@ -29,9 +29,13 @@ export default {
   <div class="row">
     <div class="col" v-for="film in store.films">
       <div class="card bg-primary text-center ">
-        <div>Titolo:{{film.title}}</div>
-        <div>Titolo originale:{{film.original_title}}</div>
-        <div>Lingua:{{film.original_language}}</div>
+        <div>Titolo:{{film.title}} {{film.name}}</div>
+        <div>Titolo originale:{{film.original_title}} {{film.original_name}}</div>
+        <div>Lingua:{{film.original_language}}
+          <span v-if="film.original_language == 'en'"><img src="./assets/img/united-kingdom.png" alt=""></span>
+          <span v-if="film.original_language == 'ja'"><img src="./assets/img/japan.png" alt=""></span>
+          <span v-if="film.original_language == 'fr'"><img src="./assets/img/france.png" alt=""></span>
+        </div>
         <div>Voto:{{film.vote_average}}</div>
       </div>
     </div>
@@ -42,4 +46,7 @@ export default {
 </template>
 
 <style scoped>
+img{
+  width: 30px;
+}
 </style>
