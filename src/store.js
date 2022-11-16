@@ -11,17 +11,24 @@ export const store = reactive({
         test2: '',
     }
     */
-    //API_KEY: 'cfa82368dfdf0a8bb369a7770e576de6',
+
+    //API_URLtest: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=matrix',
+    // Matrix come test
     UserChoice : '',
     films : null,
-    //API_QUERY: `&query=${this.test}`,
-    API_URL: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=', //senza il search
-    API_URLtest: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=matrix',
-    // Matrix come test
+    API_KEY: 'cfa82368dfdf0a8bb369a7770e576de6',
+    API_URL: 'https://api.themoviedb.org/3/search/movie?',
     callApi(url){
         axios.get(url)
         .then(response => {
-            this.films = response.data
+            this.films = response.data.results
+            console.log("yes");
+            console.log(this.films);
+            //console.log(this.films.results[0].title);
         })
+    },
+    ShowFilms () {
+        const ShowFilm = `${this.API_URL}api_key=${this.API_KEY}&query=${this.UserChoice}`
+        this.callApi(ShowFilm)
     }
 })
