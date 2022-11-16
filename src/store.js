@@ -15,23 +15,35 @@ export const store = reactive({
     //API_URLtest: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=matrix',
     // Matrix come test
     UserChoice : '',
-    films : null,
+    medias: [],
+    films : [],
+    tvSeries : null,
     API_KEY: 'cfa82368dfdf0a8bb369a7770e576de6',
-    API_URL: 'https://api.themoviedb.org/3/search/movie?',
-    API_URL_TV: 'https://api.themoviedb.org/3/search/tv?',
-    callApi(url){
-        axios.get(url)
+    API_URL: 'https://api.themoviedb.org/3/search/movie',
+    API_URL_TV: 'https://api.themoviedb.org/3/search/tv',
+    //API_URL_MULTI: 'https://api.themoviedb.org/3/search/multi',
+    callApi(url, params){ 
+        axios.get(url, {params})
         .then(response => {
             this.films = response.data.results
-            console.log("yes");
-            console.log(this.films);
-            //console.log(this.films.results[0].title);
+            this.medias = this.films.concat(this.medias);
+            console.log(this.medias, 'sono in callApi(Films)');
+            this.testApi(this.API_URL_TV, params)
+        })
+    },
+    testApi(url, params){ 
+        axios.get(url, {params})
+        .then(response => {
+            this.tvSeries = response.data.results
+            this.medias = this.tvSeries.concat(this.medias);
         })
     },
     ShowFilms () {
-        const ShowFilm = `${this.API_URL}api_key=${this.API_KEY}&query=${this.UserChoice}`
-        const ShowTvSeries = `${this.API_URL_TV}api_key=${this.API_KEY}&query=${this.UserChoice}`
-        this.callApi(ShowFilm)
-        this.callApi(ShowTvSeries)
+        const params = {
+            api_key: this.API_KEY,
+            query: this.UserChoice,
+        }
+        this.medias = [];
+        this.callApi(this.API_URL, params)
     }
 })

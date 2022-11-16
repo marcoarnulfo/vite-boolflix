@@ -26,17 +26,17 @@ export default {
   </div>
 
 <div class="container">
-  <div class="row">
-    <div class="col" v-for="film in store.films">
+  <div class="row row-cols-5">
+    <div class="col p-3" v-for="film in store.medias">
       <div class="card bg-primary text-center ">
-        <div>Titolo:{{film.title}} {{film.name}}</div>
-        <div>Titolo originale:{{film.original_title}} {{film.original_name}}</div>
-        <div>Lingua:{{film.original_language}}
+        <div>Titolo {{film.title ?? ''}}{{film.name ?? ''}}</div> <!-- ?? '' --> <!-- Titolo -->
+        <div>{{film.original_title ?? ''}}{{film.original_name ?? ''}}</div> <!-- Titolo originale: -->
+        <div>Lingua {{film.original_language}} <!-- Lingua: -->
           <span v-if="film.original_language == 'en'"><img src="./assets/img/united-kingdom.png" alt=""></span>
           <span v-if="film.original_language == 'ja'"><img src="./assets/img/japan.png" alt=""></span>
           <span v-if="film.original_language == 'fr'"><img src="./assets/img/france.png" alt=""></span>
         </div>
-        <div>Voto:{{film.vote_average}}</div>
+        <div>Voto {{film.vote_average}}</div>
       </div>
     </div>
   </div>
