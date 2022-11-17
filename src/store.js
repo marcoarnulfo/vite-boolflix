@@ -15,6 +15,8 @@ export const store = reactive({
     //API_URLtest: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=matrix',
     // Matrix come test
     UserChoice : '',
+    img_path: 'https://image.tmdb.org/t/p/w500/' ,
+    test: 'eNI7PtK6DEYgZmHWP9gQNuff8pv.jpg' ,
     medias: [],
     films : [],
     tvSeries : null,
@@ -27,8 +29,9 @@ export const store = reactive({
         .then(response => {
             this.films = response.data.results
             this.medias = this.films.concat(this.medias);
-            console.log(this.medias, 'sono in callApi(Films)');
+            //console.log(this.medias, 'sono in callApi(Films)');
             this.testApi(this.API_URL_TV, params)
+            //console.log(this.medias, 'end');
         })
     },
     testApi(url, params){ 
