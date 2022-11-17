@@ -24,17 +24,17 @@ export const store = reactive({
     API_URL: 'https://api.themoviedb.org/3/search/movie',
     API_URL_TV: 'https://api.themoviedb.org/3/search/tv',
     //API_URL_MULTI: 'https://api.themoviedb.org/3/search/multi',
-    callApi(url, params){ 
+    filmsApi(url, params){ 
         axios.get(url, {params})
         .then(response => {
             this.films = response.data.results
             this.medias = this.films.concat(this.medias);
             //console.log(this.medias, 'sono in callApi(Films)');
-            this.testApi(this.API_URL_TV, params)
+            this.seriesApi(this.API_URL_TV, params) // chiamo l'api delle serie tv
             //console.log(this.medias, 'end');
         })
     },
-    testApi(url, params){ 
+    seriesApi(url, params){ 
         axios.get(url, {params})
         .then(response => {
             this.tvSeries = response.data.results
@@ -47,6 +47,6 @@ export const store = reactive({
             query: this.UserChoice,
         }
         this.medias = [];
-        this.callApi(this.API_URL, params)
+        this.filmsApi(this.API_URL, params) // chiamo api che contiene film e serie tv 
     }
 })

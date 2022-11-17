@@ -1,5 +1,6 @@
 <script>
 //import axios from 'axios';
+
 import { store } from './store';
 export default {
   name: 'AppVue',
@@ -28,21 +29,24 @@ export default {
 <div class="container">
   <div class="row row-cols-4">
     <div class="col p-3" v-for="film in store.medias">
-      <div class="card bg-primary text-center">
+      <div class="card bg-primary p-3">
         <img class="card_img" :src="store.img_path + film.backdrop_path" alt="">
         <img v-if="film.backdrop_path == null" class="card_img" src="https://picsum.photos/200/300" alt="">
         <!-- src="{{store.img_path}}{{film.backdrop_path}}" -->
         <div class="info">
           <!-- <div>{{store.img_path + film.backdrop_path }}</div> -->
           <!-- <div>{{film.backdrop_path}}</div> -->
-          <div>Titolo {{film.title ?? ''}}{{film.name ?? ''}}</div> <!-- ?? '' --> <!-- Titolo -->
-          <div>{{film.original_title ?? ''}}{{film.original_name ?? ''}}</div> <!-- Titolo originale: -->
+          <div><span class="fw-bolder">Titolo:</span> {{film.title ?? ''}}{{film.name ?? ''}}</div> <!-- ?? '' --> <!-- Titolo -->
+          <div><span class="fw-bolder">Titolo originale:</span> {{film.original_title ?? ''}}{{film.original_name ?? ''}}</div> <!-- Titolo originale: -->
+          <font-awesome-icon :icon="['fas', 'user-secret']" />
           <div>Lingua {{film.original_language}} <!-- Lingua: -->
             <span v-if="film.original_language == 'en'"><img src="./assets/img/united-kingdom.png" alt=""></span>
             <span v-if="film.original_language == 'ja'"><img src="./assets/img/japan.png" alt=""></span>
             <span v-if="film.original_language == 'fr'"><img src="./assets/img/france.png" alt=""></span>
           </div>
-          <div>Voto {{film.vote_average}}</div>
+          <!-- <div>Voto {{film.vote_average}}</div> -->
+          <!-- DIVIDERE PER 2 {{Math.round(film.vote_average)}}-->
+          <div><span class="fw-bolder">Voto:</span> {{Math.round(film.vote_average / 2)}}</div>
         </div>
       </div>
     </div>
@@ -58,7 +62,7 @@ span img{
 }
 
 .card{
-  height: 200px;
+  height: 400px;
   //width: 400px;
   &:hover{
     //background-color: black;
@@ -74,13 +78,14 @@ span img{
     }
   }
   .info{
-    display: none;
+    //display: none;  //display none da mantenere 
   }
   
   .card_img{
+    display: none; // display none di test
     //width: 100px;
     //display: none;
-    height: 200px;
+    height: 400px;
     //object-fit: cover;
   }
 }
