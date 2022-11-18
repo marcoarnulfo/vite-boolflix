@@ -4,6 +4,7 @@ import axios from 'axios'
 export const store = reactive({
     API_URL_TEST: 'https://api.themoviedb.org/3/search/movie?api_key=cfa82368dfdf0a8bb369a7770e576de6&query=Doctor%20strange',
     // Matrix come test
+    languages: ['it', 'en', "fr", 'ja',],
     category: 'home',
     UserChoice: '',
     img_path: 'https://image.tmdb.org/t/p/w500',
