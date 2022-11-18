@@ -24,7 +24,6 @@ export default {
         <div class="d-flex">
             <input v-model="store.UserChoice" type="text" @keyup.enter="store.ShowFilms()"
                 class="align-self-center rounded">
-            <button class="btn btn-primary align-self-center ms-3">Cerca</button>
         </div>
     </div>
 </template>
