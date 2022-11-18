@@ -1,6 +1,11 @@
 <script>
 //import axios from 'axios';
-
+import ZeroStars from './components/ZeroStars.vue';
+import OneStar from './components/OneStar.vue';
+import TwoStars from './components/TwoStars.vue';
+import ThreeStars from './components/ThreeStars.vue';
+import FourStars from './components/FourStars.vue';
+import FiveStars from './components/FiveStars.vue';
 import { store } from './store';
 export default {
   name: 'AppVue',
@@ -8,6 +13,14 @@ export default {
     return{
       store
     }
+  },
+  components:{
+    ZeroStars,
+    OneStar,
+    TwoStars,
+    ThreeStars,
+    FourStars,
+    FiveStars
   },
   mounted() {
     //this.store.callApi(this.store.API_URLtest)
@@ -32,21 +45,24 @@ export default {
       <div class="card bg-primary p-3">
         <img class="card_img" :src="store.img_path + film.backdrop_path" alt="">
         <img v-if="film.backdrop_path == null" class="card_img" src="https://picsum.photos/200/300" alt="">
-        <!-- src="{{store.img_path}}{{film.backdrop_path}}" -->
         <div class="info">
-          <!-- <div>{{store.img_path + film.backdrop_path }}</div> -->
-          <!-- <div>{{film.backdrop_path}}</div> -->
           <div><span class="fw-bolder">Titolo:</span> {{film.title ?? ''}}{{film.name ?? ''}}</div> <!-- ?? '' --> <!-- Titolo -->
           <div><span class="fw-bolder">Titolo originale:</span> {{film.original_title ?? ''}}{{film.original_name ?? ''}}</div> <!-- Titolo originale: -->
-          <font-awesome-icon :icon="['fas', 'user-secret']" />
           <div>Lingua {{film.original_language}} <!-- Lingua: -->
             <span v-if="film.original_language == 'en'"><img src="./assets/img/united-kingdom.png" alt=""></span>
             <span v-if="film.original_language == 'ja'"><img src="./assets/img/japan.png" alt=""></span>
             <span v-if="film.original_language == 'fr'"><img src="./assets/img/france.png" alt=""></span>
           </div>
-          <!-- <div>Voto {{film.vote_average}}</div> -->
-          <!-- DIVIDERE PER 2 {{Math.round(film.vote_average)}}-->
-          <div><span class="fw-bolder">Voto:</span> {{Math.round(film.vote_average / 2)}}</div>
+          <div>
+            <span class="fw-bolder">Voto:</span>
+            <ZeroStars v-if="Math.round(film.vote_average / 2) == 0" />
+            <OneStar v-if="Math.round(film.vote_average / 2) == 1" />
+            <TwoStars v-if="Math.round(film.vote_average / 2) == 2"/>
+            <ThreeStars v-if="Math.round(film.vote_average / 2) == 3"/>
+            <FourStars v-if="Math.round(film.vote_average / 2) == 4"/>
+            <FiveStars v-if="Math.round(film.vote_average / 2) == 5"/>
+            {{Math.round(film.vote_average / 2)}}
+          </div>
         </div>
       </div>
     </div>
@@ -57,6 +73,7 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+
 span img{
   width: 30px;
 }
@@ -89,6 +106,7 @@ span img{
     //object-fit: cover;
   }
 }
+
 
 
 
